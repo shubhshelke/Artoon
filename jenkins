@@ -1,0 +1,15 @@
+    1  wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+    2  sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+    3  sudo apt update
+    4  sudo apt install jenkins
+    5  sudo systemctl start jenkins
+    6  systemctl status jenkins.service
+    7  sudo ufw allow 8080
+    8  sudo ufw allow OpenSSH
+    9  sudo ufw enable
+   10  sudo ufw status
+   11  java -version
+   12  sudo apt install openjdk-11-jre-headless
+   13  sudo systemctl start jenkins
+   14  systemctl status jenkins
+   15  sudo cat /var/lib/jenkins/secrets/initialAdminPassword
