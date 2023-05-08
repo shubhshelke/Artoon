@@ -1,0 +1,103 @@
+#vi file1.tf  ---create file
+
+search aws terraform provider
+
+1. connect AWS with terraform
+
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.0"
+    }
+  }
+}
+
+#ls -a
+#terraform init --- Download all plugins 
+#ls -a
+#.terraform  ----In this directory we having executable file(For terraform). press tab tab
+
+
+
+2. Go to AWS console
+   go to IAM and create user 
+   Give programatic access 
+   Give Administration access
+   then 
+   create and download Access key and secrete key
+
+
+
+3. Authentication and Configuration
+   Login terraform in aws account using IAM user Access key and secrete key.
+   Go to terraform website
+   scroll and 
+   In Authentication and Configuration
+   in credentials copy that code and paste in file1.tf
+
+provider "aws" {
+  region     = "us-west-2"          ----choose region
+  access_key = "my-access-key"
+  secret_key = "my-secret-key"
+}
+
+
+4. Create EC2 instance 
+   Go to terraform website and left side choose EC2
+   then click on AWS instance
+   choose small code to create one server
+   
+resource "aws_instance" "s1" {
+  ami           = "ami-007855ac798b5175e"
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "server1"
+  }
+}
+
+#terraform validate       ---show error in file or code
+#terraform init           ---Download plugines
+#terraform plan           ---show which things we are createing
+#terraform apply          ---create all things mensioned in .tf file
+#terraform destroy        ---destroy all things created by terraform
+
+
+
+5.create multiple EC2 instances like 3
+
+resource "aws_instance" "s1" {
+  ami           = "ami-007855ac798b5175e"
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "server1"
+  }
+}
+
+resource "aws_instance" "s2" {
+  ami           = "ami-007855ac798b5175e"
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "server2"
+  }
+}
+
+resource "aws_instance" "s3" {
+  ami           = "ami-007855ac798b5175e"
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "server3"
+  }
+}
+
+#terraform validate       ---show error in file or code
+#terraform plan           ---show which things we are createing
+#terraform apply          ---create all things mensioned in .tf file
+#terraform destroy        ---destroy all things created by terraform
+
+
+
