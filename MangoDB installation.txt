@@ -1,0 +1,105 @@
+eordpress 
+mysql db create
+
+CREATE DATABASE wpdb;
+CREATE USER 'wpuser'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL privileges ON wpdb.* TO 'wpuser'@'localhost';
+
+
+
+
+
+Install MangoDB
+
+
+- Required dependancy:
+sudo apt-get install gnupg
+or
+sudo apt install wget curl gnupg2 software-properties-common apt-transport-https ca-certificates lsb-release
+
+- Update Package
+sudo apt-get update
+
+- Check Latest Version:
+https://pgp.mongodb.com/
+
+- Import the public GPG key:
+wget -qO - https://www.mongodb.org/static/pgp/se... | sudo apt-key add -
+OR
+curl -fsSL https://www.mongodb.org/static/pgp/se... | sudo apt-key add -
+
+wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo apt-key add -
+
+or
+curl -fsSL https://www.mongodb.org/static/pgp/server-6.0.asc | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/mongodb-6.gpg
+
+
+- Verify Key Added
+apt-key list
+
+If GPG key not added then follow below command 
+Download GPG key
+ wget https://www.mongodb.org/static/pgp/server-5.0.asc
+Import key
+ sudo apt-key add server-5.0.asc
+Verify
+ sudo apt-key list
+
+
+- Creates a file:
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+or 
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu $(lsb_release-cs)/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+
+- Update APT Package:
+sudo apt-get update
+
+- Install MongoDB:
+sudo apt-get install -y mongodb-org
+
+IF GET ANY ERROR:
+- NEED TO INSTALL libssl1.1 by Adding the ubuntu 20.04 source:
+
+echo "deb http://security.ubuntu.com/ubuntu focal-security main" | sudo tee /etc/apt/sources.list.d/focal-security.list
+
+sudo apt-get update
+
+sudo apt-get install libssl1.1
+
+Manage MongoDB:
+sudo systemctl start mongod.service
+sudo systemctl status mongod
+sudo systemctl enable mongod
+sudo systemctl restart mongod
+
+OPTIONAL STEPS
+RESOLVE APT-KEY Warning
+sudo apt-key export 64C3C388 | sudo gpg --dearmour -o /usr/share/keyrings/mongo-key.gpg
+
+- Open file at Location "/etc/apt/sources.list.d/mongodb-org-6.0.list"
+- Add Line: "signed-by=/usr/share/keyrings/mongo-key.gpg"
+
+- Delete key 
+sudo apt-key del ACCC4CF8 
+
+- Delete the focal-security list file you just created:
+sudo rm /etc/apt/sources.list.d/focal-security.list
+
+
+
+
+ admin user add commands 
+
+$ mongosh
+  test>show dbs       .........show databases
+  test>use admin
+  admin>db.getUsers()    ........check user list
+  admin>db.createUser({user: "admin", pwd: passwordPrompt(), roles: [{ role: "userAdminAnyDatabase", db: "admin" }, "readwriteAnyDatabase" ]})    .................create user
+
+if not work then use
+  admin> db.createUser({user: "admin", pwd: passwordPrompt(), roles: [{ role: "userAdminAnyDatabase", db: "admin" }]})
+  Enter password
+  ***********{ ok: 1 }
+
+
+

@@ -1,0 +1,112 @@
+Mongodb
+
+Installation of MongoDB 4.4 version
+1.1.0. Add Offcial package Repository
+ https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
+
+wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
+sudo apt-get update
+sudo apt-get install -y mongodb-org
+
+
+Freeze accidential updates
+
+echo "mongodb-org hold" | sudo dpkg --set-selections
+echo "mongodb-org-server hold" | sudo dpkg --set-selections
+echo "mongodb-org-shell hold" | sudo dpkg --set-selections
+echo "mongodb-org-mongos hold" | sudo dpkg --set-selections
+echo "mongodb-org-tools hold" | sudo dpkg --set-selections
+
+ Start the service
+
+sudo service mongod start
+sudo service mongod status
+sudo service mongod stop
+sudo service mongod restart
+
+ Enable MongoDb Authentication
+
+#vi /etc/mongod.conf
+
+net:
+    bindIp: 0.0.0.0   //for Out Side access
+    port: 27017
+security:
+    authorization: "enabled"     //for admin authentication
+
+#sudo service mongodb restart
+
+
+Create Admin User using the MongoDB shell
+
+> use admin
+> db.createUser(
+... {
+...    user: "DBAdmin",
+...    pwd: "SecurePassword",
+...    roles: [ { role: "userAdminAnyDatabase", db: "admin" } ]
+...    }
+... )
+
+
+Create user for database
+
+  > use admin
+  > db.auth('admin','passwd')
+  1
+  > use dbname
+  > db.createUser({user:"usernm",pwd:"passwd",roles:["readWrite","dbAdmin","dbOwner"]})
+
+
+Create Mongodb Backup
+
+  mongodump --db databasename --host 127.0.0.1 --port 27017 --username admin --password userpasswd --authenticationDatabase admin
+
+
+Mongodb Restore command
+
+  mongorestore --host 127.0.0.1 -d database_name --username username   /path/to/backupfile/
+
+
+Create mongodb Table Dump
+
+  mongodump --db dbname --collection=table_name --out=data/ --host 127.0.0.1 --port 27017 --username admin --password password --authenticationDatabase admin
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

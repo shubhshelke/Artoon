@@ -1,0 +1,38 @@
+https://docs.gitlab.com/runner/install/linux-repository.html
+
+Add official repo
+curl -L "https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh" | sudo bash
+
+install 
+sudo apt-get install gitlab-runner
+
+go to 
+#cd /home/
+# ls
+o/p    gitlab-runner
+
+Give grand permissions 
+open file
+# sudo visudo
+     paste below 
+  root    ALL=(ALL:ALL) ALL
+  gitlab-runner ALL=(ALL:ALL) ALL       .....paste this
+  then exit
+
+check version 
+# gitlab-runner --version
+
+check status
+# gitlab-runner status
+
+#gitlab-runner start
+#gitlab-runner stop
+#gitlab-runner restart
+
+Now,
+Resistter runner 
+Go to browser , scroll down 
+click on Register runner
+Go to linux
+
+# sudo gitlab-runner register

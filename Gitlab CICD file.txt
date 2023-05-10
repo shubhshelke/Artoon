@@ -1,0 +1,25 @@
+stages:
+  - build-image
+  - deploy
+
+
+docker_build_development:
+  stage: build-image
+  tags:
+    - kube-ssh
+  script:
+    - cp /home/config/dev/ludo-3games-mgp/.env .
+    - cp /home/config/dev/ludo-3games-mgp/Dockerfile .
+    - cp /home/config/dev/ludo-3games-mgp/node-rolling-update.yml .
+    - cp -r /home/config/dev/ludo-3games-mgp/certificate .
+    - docker build -f Dockerfile -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA .
+    - echo $CI_REGISTRY_IMAGE
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
+    - DOCKER_IMG="$CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA"
+    - echo $DOCKER_IMG
+    - sed -i "s|gitlab.*|${DOCKER_IMG}|" node-rolling-update.yml
+    - kubectl apply -f node-rolling-update.yml
+  when: manual
+  only: 
+    - development-intigration

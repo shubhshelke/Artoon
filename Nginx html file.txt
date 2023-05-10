@@ -1,0 +1,13 @@
+Nginx HTML file
+
+
+server {
+        listen 80;
+        listen [::]:80;
+        server-name mysite.com;
+        root /var/www/mysite/;
+        index index.html;
+        location / {
+                try-files $uri $uri / =404;
+        }
+}

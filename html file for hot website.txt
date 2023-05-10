@@ -1,0 +1,70 @@
+<html>
+ <head>
+   <title> Welcome to shubhpro.us ! </title>
+ </head>
+ <body>
+   <h1> success ! The shubhpro.us Virtual host is working ! </h1>
+ </body>
+</html>
+
+
+
+
+
+
+
+Apache server Host Website on Ubuntu 
+
+ 342  sudo apt update
+  343  sudo apt-get install apache2
+  344  sudo service apache2 start
+  345  sudo service apache2 restart
+  346  sudo service apache2 status
+  347  sudo service apache2 reload
+  348  sudo service apache2 status
+  349  cd
+  350  sudo service apache2 status
+  351  sudo ufw status
+  352  sudo mkdir -p /var/www/demosite
+  353  sudo chmod -R 755 /var/www/
+  354  la -la /var/www/
+  355  sudo nano /var/www/demosite/index.html
+  356  la -la /var/www/demosite/
+  357  sudo chmod -R 755 /var/www/
+  358  la -la /var/www/demosite/
+  359  cd /etc/apache2/sites-available/
+  360  ls
+  361  sudo cp 000-default.conf ./demosite.com.conf
+  362  ls
+  363  sudo nano demosite.com.conf
+  364  sudo a2ensite demosite.com.conf
+  365  cd ..
+  366  ls -la
+  367  sudo a2dissite 000-default.conf
+  368  sudo systemctl restart apache2
+  369  sudo systemctl status apache2
+  370  sudo ufw status
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+kubectl get pods --namespace kubernetes-dashboard

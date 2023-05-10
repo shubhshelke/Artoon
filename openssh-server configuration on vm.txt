@@ -1,0 +1,39 @@
+To install and configure the OpenSSH server on an Ubuntu virtual machine, you can follow these steps:
+
+Open a terminal window on the Ubuntu virtual machine.
+
+Update the package index by running the following command:
+
+sql
+Copy code 
+sudo apt update
+ 
+Install the OpenSSH server package by running the following command:
+Copy code
+sudo apt install openssh-server
+
+Once the installation is complete, the SSH service should start automatically. You can verify this by running the following command:
+lua
+Copy code
+sudo systemctl status ssh
+
+This should display the status of the SSH service, which should be "active (running)".
+
+
+If the SSH service is not running, you can start it manually by running the following command:
+sql
+Copy code
+sudo systemctl start ssh
+
+By default, the SSH server listens on port 22. If you want to change the default port, you can edit the SSH configuration file by running the following command:
+bash
+Copy code
+sudo nano /etc/ssh/sshd_config
+
+In this file, you can find the line that specifies the port number (usually it's commented out), and change it to your desired port number. Once you've made your changes, save the file and exit the editor.
+
+If you've changed the port number, you'll need to restart the SSH service by running the following command:
+Copy code
+sudo systemctl restart ssh
+
+That's it! You should now be able to connect to your Ubuntu virtual machine using SSH from another machine on the network.

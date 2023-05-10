@@ -1,0 +1,21 @@
+To set up port forwarding in a NAT network on VM VirtualBox, follow these steps:
+
+Start by opening VirtualBox and selecting the virtual machine you want to configure.
+Click on the "Settings" button and select the "Network" option from the left-hand menu.
+In the "Adapter 1" tab, ensure that "NAT" is selected as the "Attached to" option.
+Click on the "Advanced" drop-down arrow to expand the advanced network settings.
+Click on the "Port Forwarding" button to access the port forwarding configuration options.
+Click on the "+" button to add a new port forwarding rule.
+In the "Name" field, enter a name for the rule (e.g., "SSH").
+In the "Protocol" field, select the protocol for the rule (e.g., TCP).
+In the "Host IP" field, enter "127.0.0.1" if you want to forward the port to the host machine, or enter another IP address
+ if you want to forward the port to a specific machine on your network.
+In the "Host Port" field, enter the port number you want to forward (e.g., 22 for SSH).
+In the "Guest IP" field, enter the IP address of the virtual machine (you can find this in the virtual machine by running the "ip addr" command).
+In the "Guest Port" field, enter the port number that the application or service is running on in the virtual machine (e.g., 22 for SSH).
+Click "OK" to save the port forwarding rule.
+Repeat steps 6-13 for any additional port forwarding rules you want to set up.
+Click "OK" to close the network settings window.
+Once you've set up port forwarding in the NAT network on your virtual machine, 
+you should be able to connect to the application or service running in the virtual machine from your host machine by using the host IP address 
+and port number you specified in the port forwarding rule.
